@@ -2,6 +2,7 @@
 #script version of: https://www.digitalocean.com/community/tutorials/how-to-set-up-an-ikev2-vpn-server-with-strongswan-on-ubuntu-16-04
 echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
 echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections
+apt update
 apt-get -y install strongswan strongswan-plugin-eap-mschapv2 moreutils iptables-persistent
 #Make key directory
 mkdir vpn-certs
