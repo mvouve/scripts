@@ -13,4 +13,6 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres'"
 
 #Set programs to run on startup
 ln vpnbuddyapi /etc/init.d/vpnbuddyapi
+chmod +x /etc/init.d/vpnbuddyapi
 ln VPNBuddyFilter /etc/init.d/VPNBuddyFilter
+chmod +x /etc/init.d/VPNBuddyFilter
