@@ -7,5 +7,6 @@ tar -zxvf filter-api.tar.gz
 apt install -y libpqxx-dev postgresql daemon
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres'"
 ./VPNBuddyFilter
-nohup ./vpnbuddyapi 1>/dev/null 2>/dev/null &
+./vpnbuddyapi start
+./vpnbuddyapi install
 
