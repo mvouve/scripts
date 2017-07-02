@@ -5,7 +5,9 @@ wget marcvouve.com/files/filter-api.tar.gz
 #untar Server files (
 tar -zxvf filter-api.tar.gz
 apt install -y libpqxx-dev postgresql daemon
+ser
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres'"
+systemctl enable postgresql
 ./VPNBuddyFilter
 ./vpnbuddyapi install
 ./vpnbuddyapi start
