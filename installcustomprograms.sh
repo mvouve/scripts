@@ -8,13 +8,12 @@ apt install -y libpqxx-dev postgresql daemon
 ser
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres'"
 systemctl enable postgresql
-./VPNBuddyFilter
-./vpnbuddyapi install
-./vpnbuddyapi start
 
+mv vpnbuddyapi /usr/sbin/vpnbuddyapi
+mv VPNBuddyFilter /usr/sbin/VPNBuddyFilter
+mv geoip /usr/sbin/geoip/
+mv vpnbuddy /etc/init.d/vpnbuddy
 
-#Set programs to run on startup
-ln vpnbuddyapi /etc/init.d/vpnbuddyapi
-chmod +x /etc/init.d/vpnbuddyapi
-ln VPNBuddyFilter /etc/init.d/VPNBuddyFilter
-chmod +x /etc/init.d/VPNBuddyFilter
+service install vpnbuddy
+systemctl enable vpnbuddy
+systemctl start vpnbuddy
