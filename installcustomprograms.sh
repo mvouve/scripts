@@ -14,6 +14,5 @@ mv VPNBuddyFilter /usr/sbin/VPNBuddyFilter
 mv geoip /usr/sbin/geoip/
 mv vpnbuddy /etc/init.d/vpnbuddy
 
-service install vpnbuddy
 systemctl enable vpnbuddy
 systemctl start vpnbuddy
