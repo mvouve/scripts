@@ -82,24 +82,26 @@ iptables -Z
 
 # Don't close the SSH session!
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 
-# Allow all loopback connections
-#iptables -A INPUT -i lo -j ACCEPT
 
-# Allow IPSec connections
-#iptables -A INPUT -p udp --dport  500 -j ACCEPT
-#iptables -A INPUT -p udp --dport 4500 -j ACCEPT
+#Enable loopback for internal use
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
 
-# Forward ESP traffic
-#iptables -A FORWARD --match policy --pol ipsec --dir in  --proto esp -s 10.10.10.0/24 -j ACCEPT
-#iptables -A FORWARD --match policy --pol ipsec --dir out --proto esp -d 10.10.10.0/24 -j ACCEPT
+#enable DNS
+iptables -A INPUT -p udp --sport 53 -s 8.8.8.8 -j ACCEPT
+iptables -A OUTPUT -p udp --dport 53 -d 8.8.8.8 -j ACCEPT
+iptables -A INPUT -p udp --sport 53 -s 2001:4860:4860::8844 -j ACCEPT
+iptables -A OUTPUT -p udp --dport 53 -d 2001:4860:4860::8844 -j ACCEPT
+iptables -A INPUT -p udp --sport 53 -s 2001:4860:4860::8888 -j ACCEPT
+iptables -A OUTPUT -p udp --dport 53 -d 2001:4860:4860::8888 -j ACCEPT
 
+#allow connections from hosts connected to the server
+iptables -A INPUT -s 10.10.10.0/24 -j ACCEPT
+iptables -A OUTPUT -d 10.10.10.0/24 -j ACCEPT
 
-# Allow VPN to accept traffic from the internet on behalf of the Client
-#iptables -t nat -A POSTROUTING -s $1 -o eth0 -m policy --pol ipsec --dir out -j ACCEPT
-#iptables -t nat -A POSTROUTING -s $1 -o eth0 -j MASQUERADE
-#iptables -t mangle -A FORWARD --match policy --pol ipsec --dir in -s 10.10.10.0/24 -o eth0 -p tcp -m tcp --tcp-flags SYN,RST SYN -m tcpmss --mss 1361:1536 -j TCPMSS --set-mss 1360
 
 # for ISAKMP (handling of security associations)
 iptables -A INPUT -p udp --dport 500 --j ACCEPT
@@ -111,8 +113,8 @@ iptables -A INPUT -p esp -j ACCEPT
 iptables -t nat -A POSTROUTING -j SNAT --to-source $1 -o eth0
 
 # Drop everything else
-#iptables -A INPUT -j DROP
-#iptables -A FORWARD -j DROP
+iptables -A INPUT -j DROP
+iptables -A FORWARD -j DROP
 netfilter-persistent save
 netfilter-persistent reload
 
