@@ -114,11 +114,7 @@ iptables -A INPUT -p esp -j ACCEPT
 # for the routing of packets on the server
 iptables -t nat -A POSTROUTING -j SNAT --to-source $1 -o eth0
 
-# Drop everything else
-iptables -P INPUT DROP
-iptables -P OUTPUT DROP
-netfilter-persistent save
-netfilter-persistent reload
+
 
 # Edit Sysctl.conf
 mv sysctl.conf sysctl.conf.orig
