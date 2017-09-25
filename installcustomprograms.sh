@@ -16,3 +16,9 @@ mv vpnbuddy /etc/init.d/vpnbuddy
 
 systemctl enable vpnbuddy
 systemctl start vpnbuddy
+
+# Finish dropping everything from the firewall and save.
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+netfilter-persistent save
+netfilter-persistent reload
