@@ -92,7 +92,7 @@ iptables -A OUTPUT -o lo -j ACCEPT
 
 #enable DNS
 iptables -A INPUT -p udp --sport 53 -j ACCEPT
-iptables -A INPUT -p --dport 53 -j ACCEPT
+iptables -A OUTPUT -p --dport 53 -j ACCEPT
 #iptables -A INPUT -p udp --sport 53 -s 8.8.8.8 -j ACCEPT
 #iptables -A OUTPUT -p udp --dport 53 -d 8.8.8.8 -j ACCEPT
 #iptables -A INPUT -p udp --sport 53 -s 2001:4860:4860::8844 -j ACCEPT
