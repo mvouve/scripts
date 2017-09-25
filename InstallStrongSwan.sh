@@ -113,8 +113,8 @@ iptables -A INPUT -p esp -j ACCEPT
 iptables -t nat -A POSTROUTING -j SNAT --to-source $1 -o eth0
 
 # Drop everything else
-iptables -A INPUT -j DROP
-iptables -A FORWARD -j DROP
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
 netfilter-persistent save
 netfilter-persistent reload
 
