@@ -91,12 +91,14 @@ iptables -A INPUT -i lo -j ACCEPT
 iptables -A OUTPUT -o lo -j ACCEPT
 
 #enable DNS
-iptables -A INPUT -p udp --sport 53 -s 8.8.8.8 -j ACCEPT
-iptables -A OUTPUT -p udp --dport 53 -d 8.8.8.8 -j ACCEPT
-iptables -A INPUT -p udp --sport 53 -s 2001:4860:4860::8844 -j ACCEPT
-iptables -A OUTPUT -p udp --dport 53 -d 2001:4860:4860::8844 -j ACCEPT
-iptables -A INPUT -p udp --sport 53 -s 2001:4860:4860::8888 -j ACCEPT
-iptables -A OUTPUT -p udp --dport 53 -d 2001:4860:4860::8888 -j ACCEPT
+iptables -A INPUT -p udp --sport 53 -j ACCEPT
+iptables -A INPUT -p --dport 53 -j ACCEPT
+#iptables -A INPUT -p udp --sport 53 -s 8.8.8.8 -j ACCEPT
+#iptables -A OUTPUT -p udp --dport 53 -d 8.8.8.8 -j ACCEPT
+#iptables -A INPUT -p udp --sport 53 -s 2001:4860:4860::8844 -j ACCEPT
+#iptables -A OUTPUT -p udp --dport 53 -d 2001:4860:4860::8844 -j ACCEPT
+#iptables -A INPUT -p udp --sport 53 -s 2001:4860:4860::8888 -j ACCEPT
+#iptables -A OUTPUT -p udp --dport 53 -d 2001:4860:4860::8888 -j ACCEPT
 
 #allow connections from hosts connected to the server
 iptables -A INPUT -s 10.10.10.0/24 -j ACCEPT
