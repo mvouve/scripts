@@ -83,7 +83,7 @@ iptables -Z
 # Don't close the SSH session!
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+#iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 
 
 #Enable loopback for internal use
